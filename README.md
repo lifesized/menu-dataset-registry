@@ -1,79 +1,35 @@
-# Menu Intelligence Dataset — Proof of Existence
+# Menu Intelligence Dataset Registry
 
-Cryptographic proof that a comprehensive restaurant menu intelligence dataset has been continuously collected, structured, and maintained since **December 2025**.
+We're building the definitive structured dataset of restaurant menus in New York City — and eventually, every major metro in the US.
 
-## The Dataset
+Since December 2025, our system has been continuously collecting, structuring, and analyzing menus across hundreds of NYC restaurants. We don't just capture what's on a menu today. We capture how menus change — what dishes appear, what disappears, how prices move, and what patterns emerge across neighborhoods, cuisines, and seasons.
 
-We're building the most detailed structured menu database in New York City. Every month, our system scrapes, extracts, and normalizes menu data across hundreds of restaurants — capturing not just what's on the menu, but how menus evolve over time.
+This is the kind of longitudinal food data that has never existed at this level of detail.
 
-**What we track:**
+## What's in the Dataset
 
-- **Restaurants** — Locations, neighborhoods, cuisine types, and pricing tiers across NYC
-- **Dishes & Beverages** — Full menu items with prices, descriptions, ingredients, and category classifications
-- **Menu Snapshots** — Point-in-time captures that reveal how menus change month over month
-- **Dish Variant Groups** — Cross-restaurant analysis linking the same dish across different menus (e.g., every Margherita pizza in the city)
-- **Allergen Verifications** — Confidence-scored allergen profiles with FDA-standard categorization
-- **Historical Trends** — Price changes, seasonal rotations, dish additions and removals
+**Hundreds of restaurants.** Tens of thousands of dishes and beverages. Every item structured with pricing, categorization, and ingredients — linked across restaurants so you can compare the same dish city-wide.
 
-## Growth
+**Monthly snapshots.** We capture menus at regular intervals, building a living history of NYC's dining landscape. Which restaurants are raising prices? Which dishes are trending? What's seasonal and what's permanent?
 
-| Period | Restaurants | Dishes | Beverages | Snapshots |
-|--------|------------|--------|-----------|-----------|
-| Dec 2025 | 18 | 1,570 | — | 27 |
-| Jan 2026 | 109 | 9,615 | 10,181 | 285 |
-| Feb 2026 | 181 | 14,375 | 16,738 | 409 |
+**Allergen intelligence.** Confidence-scored allergen profiles for menu items, built to power the next generation of dietary safety tools.
 
-## Why This Repo Exists
+## Dataset Growth
 
-Each month, the full dataset is exported as deterministic JSON and hashed with SHA-256. Only the hash and aggregate metadata are committed here — **the actual data remains private**.
+| Period | Restaurants | Menu Items | Snapshots |
+|--------|------------|------------|-----------|
+| Dec 2025 | 18 | 1,570 | 27 |
+| Jan 2026 | 109 | 19,796 | 285 |
+| Feb 2026 | 181 | 31,113 | 409 |
 
-The git commit history provides an immutable, publicly verifiable record that this data existed on or before each commit date. This is the same principle behind blockchain timestamping, but simpler.
+This repo is updated monthly with a new entry as the dataset grows.
 
-## Proof Format
+## Data Integrity
 
-Each file in `proofs/` contains:
+Each month, the complete dataset is hashed (SHA-256) and the hash is committed here. The data itself is private — only aggregate counts and the cryptographic fingerprint are published.
 
-```json
-{
-  "version": "1.0",
-  "period": "2026-02",
-  "generatedAt": "2026-02-15T...",
-  "hash": {
-    "algorithm": "SHA-256",
-    "value": "cf3cba3c..."
-  },
-  "metadata": {
-    "restaurants": 181,
-    "menuSnapshots": 409,
-    "dishes": 14375,
-    "beverages": 16738,
-    "allergenVerifications": 0,
-    "dishVariantGroups": 7243
-  },
-  "filter": {
-    "type": "cumulative",
-    "cutoffDate": "2026-03-01T00:00:00.000Z"
-  },
-  "note": null
-}
-```
+The git commit timestamps serve as an immutable public record of the dataset's existence and scale at each point in time. Given access to the raw dataset, anyone can independently verify a proof by computing the hash and comparing it to the value in `proofs/YYYY-MM.json`.
 
-## Verification
+## Contact
 
-Given a dataset export for any period, anyone can verify it matches the proof:
-
-```bash
-# macOS
-shasum -a 256 export.json
-
-# Linux
-sha256sum export.json
-```
-
-The hash must match the `hash.value` in the corresponding proof file. The export uses deterministic JSON serialization (sorted keys, ISO date strings) to ensure reproducibility.
-
-## Notes
-
-- Proofs marked with a `note` field were generated retroactively — the data existed at the stated time (verified by server-generated database timestamps), but the hash was committed after the fact.
-- Starting February 2026, all proofs are generated contemporaneously.
-- This repository contains **no actual data** — no restaurant names, menu items, prices, allergen profiles, or credentials.
+Restaurant owners can request removal by [opening an issue](https://github.com/lifesized/menu-data-proofs/issues) in this repository.
