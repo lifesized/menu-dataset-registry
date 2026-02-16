@@ -32,4 +32,4 @@ The git commit timestamps serve as an immutable public record of the dataset's e
 
 ## Contact
 
-Restaurant owners can request removal by [opening an issue](https://github.com/lifesized/menu-data-proofs/issues) in this repository.
+Restaurant owners can request removal by [opening an issue](https://github.com/lifesized/menu-dataset-registry/issues) in this repository.
