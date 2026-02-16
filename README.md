@@ -1,33 +1,54 @@
-# Menu Data Proofs
+# Menu Intelligence Dataset — Proof of Existence
 
-This repository contains SHA-256 hashes of a menu intelligence dataset, committed monthly to provide verifiable proof of data existence at each point in time.
+Cryptographic proof that a comprehensive restaurant menu intelligence dataset has been continuously collected, structured, and maintained since **December 2025**.
 
-## How It Works
+## The Dataset
 
-Each month, the full dataset is exported as deterministic JSON (sorted keys, consistent serialization) and hashed with SHA-256. Only the hash and aggregate metadata are committed here — **no actual restaurant, menu, or allergen data is published**.
+We're building the most detailed structured menu database in New York City. Every month, our system scrapes, extracts, and normalizes menu data across hundreds of restaurants — capturing not just what's on the menu, but how menus evolve over time.
 
-The git commit timestamp provides an immutable record that this data existed on or before the commit date.
+**What we track:**
+
+- **Restaurants** — Locations, neighborhoods, cuisine types, and pricing tiers across NYC
+- **Dishes & Beverages** — Full menu items with prices, descriptions, ingredients, and category classifications
+- **Menu Snapshots** — Point-in-time captures that reveal how menus change month over month
+- **Dish Variant Groups** — Cross-restaurant analysis linking the same dish across different menus (e.g., every Margherita pizza in the city)
+- **Allergen Verifications** — Confidence-scored allergen profiles with FDA-standard categorization
+- **Historical Trends** — Price changes, seasonal rotations, dish additions and removals
+
+## Growth
+
+| Period | Restaurants | Dishes | Beverages | Snapshots |
+|--------|------------|--------|-----------|-----------|
+| Dec 2025 | 18 | 1,570 | — | 27 |
+| Jan 2026 | 109 | 9,615 | 10,181 | 285 |
+| Feb 2026 | 181 | 14,375 | 16,738 | 409 |
+
+## Why This Repo Exists
+
+Each month, the full dataset is exported as deterministic JSON and hashed with SHA-256. Only the hash and aggregate metadata are committed here — **the actual data remains private**.
+
+The git commit history provides an immutable, publicly verifiable record that this data existed on or before each commit date. This is the same principle behind blockchain timestamping, but simpler.
 
 ## Proof Format
 
-Each proof file (`proofs/YYYY-MM.json`) contains:
+Each file in `proofs/` contains:
 
 ```json
 {
   "version": "1.0",
   "period": "2026-02",
-  "generatedAt": "2026-02-15T12:00:00.000Z",
+  "generatedAt": "2026-02-15T...",
   "hash": {
     "algorithm": "SHA-256",
-    "value": "a1b2c3d4..."
+    "value": "cf3cba3c..."
   },
   "metadata": {
-    "restaurants": 150,
-    "menuSnapshots": 420,
-    "dishes": 8500,
-    "beverages": 2100,
-    "allergenVerifications": 12000,
-    "dishVariantGroups": 3200
+    "restaurants": 181,
+    "menuSnapshots": 409,
+    "dishes": 14375,
+    "beverages": 16738,
+    "allergenVerifications": 0,
+    "dishVariantGroups": 7243
   },
   "filter": {
     "type": "cumulative",
@@ -37,14 +58,9 @@ Each proof file (`proofs/YYYY-MM.json`) contains:
 }
 ```
 
-- **hash**: SHA-256 of the complete deterministic JSON export
-- **metadata**: Aggregate record counts (no actual data)
-- **filter**: `cumulative` means all data up to the cutoff date
-- **note**: Present on retroactive proofs to indicate they were generated after the data period
-
 ## Verification
 
-If you have access to the dataset export for a given period, verify it matches the proof:
+Given a dataset export for any period, anyone can verify it matches the proof:
 
 ```bash
 # macOS
@@ -54,19 +70,10 @@ shasum -a 256 export.json
 sha256sum export.json
 ```
 
-The resulting hash should match the `hash.value` in the corresponding proof file.
+The hash must match the `hash.value` in the corresponding proof file. The export uses deterministic JSON serialization (sorted keys, ISO date strings) to ensure reproducibility.
 
-The export must use identical deterministic JSON serialization (sorted keys, ISO date strings) to produce the same hash.
+## Notes
 
-## Retroactive Proofs
-
-Proofs for periods before this repository was created are marked with a `note` field explaining they were generated retroactively. The data itself existed at the stated time (verified by server-generated database timestamps), but the hash commitment was made after the fact.
-
-Starting with the month this repository was created, all proofs are generated contemporaneously.
-
-## What This Does NOT Contain
-
-- No restaurant names, addresses, or URLs
-- No menu items, prices, or descriptions
-- No allergen data or ingredient lists
-- No API keys or credentials
+- Proofs marked with a `note` field were generated retroactively — the data existed at the stated time (verified by server-generated database timestamps), but the hash was committed after the fact.
+- Starting February 2026, all proofs are generated contemporaneously.
+- This repository contains **no actual data** — no restaurant names, menu items, prices, allergen profiles, or credentials.
