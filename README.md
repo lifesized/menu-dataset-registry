@@ -2,6 +2,9 @@
 
 We're building the definitive structured dataset of restaurant menus in New York City — and eventually, every major metro in the US.
 
+<img width="2872" height="1984" alt="CleanShot 2026-02-25 at 13 29 14@2x" src="https://github.com/user-attachments/assets/d628577c-34cf-4606-a27b-85ee4cfed536" />
+
+
 Since December 2025, our system has been continuously collecting, structuring, and analyzing menus across hundreds of NYC restaurants. We don't just capture what's on a menu today. We capture how menus change — what dishes appear, what disappears, how prices move, and what patterns emerge across neighborhoods, cuisines, and seasons.
 
 This is the kind of longitudinal food data that has never existed at this level of detail.
